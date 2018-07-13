@@ -7,10 +7,7 @@ export default function Message(props){
         <img width="50px" height="50px" src={props.msg.user.avatar} />
         <p>{props.msg.user.name}</p>
       </span>
-      <span className="message-content">{props.msg.content}</span>
-      {/*<div className="message system">
-        {props.msg.type}
-      </div>*/}
+      <span className="message-content">{props.msg.content}</span>      
     </div>
   )
 }
