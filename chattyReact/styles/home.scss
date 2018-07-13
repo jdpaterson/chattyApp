@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
+
+body {
+  background: #353a47;
+  color: #dc136c;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #84b082;
+  height: 5em;
+  p {
+    padding: 0.5em;
+  }
+}
+
+.chatbar {
+  background: #9a6d38;
+  border-top: 1px solid black;
+  bottom: 0;
+  display: flex;
+  left: 0;
+  padding: 5px;
+  position: fixed;
+  right: 0;
+}
+.chatbar-oldUser {
+  height: 40px;
+}
+.chatbar-message,
+.chatbar-username {
+  border: 1px solid black;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  margin: 5px;
+  padding: 0 9px;
+}
+
+.chatbar-message {
+  flex: 8;
+}
+
+.chatbar-username {
+  flex: 1;
+}
+
+.message {
+  display: flex;
+  padding: 5px;
+}
+
+.message.system {
+  font-style: italic;
+  padding: 5px 20px;
+}
+
+.message-content,
+.message-username {
+  overflow: hidden;
+  margin: 5px;
+  padding: 0 10px;
+  display: flex;
+}
+
+.message-content {
+  flex: 8;
+}
+
+.message-username {
+  flex: 1;
+  font-weight: 700;
+  justify-content: space-around;
+}
+
+.navbar-brand {
+  color: inherit;
+  font-weight: 700;
+  font-size: 28px;
+  padding: 0.5em;
+  text-decoration: none;
+  visibility: middle;
+}
+
+.notification{
+  padding: 5px;
+  margin: 5px;
+  text-align: right;
+}
+.notification-content{
+  color: #cc3f0c;
+}
