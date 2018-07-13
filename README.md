@@ -10,8 +10,8 @@ A single page application that is a real-time chat room using React.js and Webso
 
 ## To Run
 
-1. In a terminal window, navigate to chattyReact and run npm start
-2. In a separate terminal window, execute node /chattyServer/server.js
+1. In a terminal window, navigate to /react-simple-boilerplate and run 'npm start'
+2. In a separate terminal window, execute 'node /chattyServer/server.js'
 3. In a browser, navigate to http://0.0.0.0:3000
 4. Start typing away!
 
