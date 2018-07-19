@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Functional component for notification type messages
 export default function Notification(props){
   return (
     <div className="notification">

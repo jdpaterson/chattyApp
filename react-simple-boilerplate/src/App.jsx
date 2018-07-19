@@ -5,7 +5,9 @@ import ChatBar from './ChatBar.jsx';
 import msgHelpers from './msgHelpers.jsx';
 import data from './data.js';
 
+//Main app component
 export default class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -16,15 +18,20 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+
+    //Establish a new websocket connection
     let newSocket = new WebSocket("ws://0.0.0.0:3001");
     this.socket = newSocket;
     this.socket.app = this;
     let newState = {}
 
+    //When a new message is received from server
     this.socket.onmessage = function(event) {
+
       const data = JSON.parse(event.data);
-      console.log('New Message: ', data);
       const messages = this.app.state.messages;
+
+      //Call the relevant helper per the specified data action
       if (data.action === 'myLogin') {
         newState = msgHelpers.helpMyLogin(data);
       }
@@ -42,12 +49,14 @@ export default class App extends Component {
       }else {
         newState = msgHelpers.helpOther(data, messages);
       }
+      //Set the state based on what the helpers returned
       this.app.setState(() => {
         return newState;
       })
     }
   }
 
+  //Sends a given message to the server
   addMessage = (newMsg) => {
     this.socket.send(JSON.stringify(newMsg));
   }
@@ -55,8 +64,8 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <NavBar numUsers ={this.state.numUsers} />
-        <MessageList messages = {this.state.messages} />
+        <NavBar numUsers={this.state.numUsers} />
+        <MessageList messages={this.state.messages} />
         <ChatBar addMsg={this.addMessage} user={this.state.user}/>
       </div>
     )

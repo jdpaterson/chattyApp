@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
 export default class Footer extends Component {
+
   constructor(props){
     super(props);
-
     this.state = {
       username: props.user.name,
       content: '',
@@ -11,6 +11,7 @@ export default class Footer extends Component {
     }
   }
 
+  //On Enter press, call the addMsg prop function
   handleMsgPress = (ev) => {
     if(ev.key == 'Enter'){
       const msg = {
@@ -25,12 +26,14 @@ export default class Footer extends Component {
     }
   }
 
+  //When the message input is changed, update the state to reflect the change
   handleMsgChange = (ev) => {
     this.setState({
       content: ev.target.value
     })
   }
 
+  //On Enter press, call the .addMsg prop function
   handleNmPress = (ev) => {
     if(ev.key == 'Enter'){
       const newMsg = {
@@ -42,6 +45,7 @@ export default class Footer extends Component {
     }
   }
 
+  //When the username input is changed, update the state to reflect the change
   handleNameChange = (ev) => {
     this.setState({
       username: ev.target.value

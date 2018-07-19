@@ -3,6 +3,7 @@ import Message from './Message.jsx';
 import Notification from './Notifications.jsx';
 
 export default function MessageList(props){
+  //Render the messages and notifications
   const msgItems = props.messages.map((msg) => {
     let reactVal;
     if (msg.type === 'notification'){

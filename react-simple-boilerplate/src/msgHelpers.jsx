@@ -2,6 +2,7 @@ let messages;
 let newState = {};
 let newMsg = {};
 
+//Returns an object for a users own new login
 function helpMyLogin(data){
   return {
     numUsers: data.numUsers,
@@ -9,6 +10,7 @@ function helpMyLogin(data){
   }
 }
 
+//Returns an object for when another user has logged in
 function helpNewLogin(data, stateMessages){
   const newMsg = {
     id: data.id,
@@ -23,6 +25,7 @@ function helpNewLogin(data, stateMessages){
   }
 }
 
+//Returns an object for when another user logs out
 function helpLogout(data, stateMessages){
   const newMsg = {
     id: data.id,
@@ -36,6 +39,8 @@ function helpLogout(data, stateMessages){
       messages: stateMessages.concat(newMsg)
   }
 }
+
+//Returns an object for when the current user changes their name
 function helpMyNameChange(data, stateMessages){
   const newMsg = {
     id: data.id,
@@ -50,6 +55,7 @@ function helpMyNameChange(data, stateMessages){
   }
 }
 
+//Return an object for when another user changed their name
 function helpNameChange(data, stateMessages){
   const newMsg = {
     id: data.id,
@@ -63,6 +69,7 @@ function helpNameChange(data, stateMessages){
   }
 }
 
+//Returns an object for other messages not described above
 function helpOther(data, stateMessages){
   const newMsg = {
     id: data.id,

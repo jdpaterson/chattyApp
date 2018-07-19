@@ -13,7 +13,10 @@ const connects = {};
 
 wss.on('connection', async (ws) => {
 
+  //When a new connection is established
   const user = await srvHelpers.helpNewLogin(wss, ws, connects);
+
+  //When a message is received
   ws.on('message', (message) => {
     message = JSON.parse(message);
     if(message.action === 'nameChange'){
@@ -23,7 +26,10 @@ wss.on('connection', async (ws) => {
       srvHelpers.helpNewMessage(wss, ws, message, user);
     }
   });
+
+  //When a connection is closed
   ws.on('close', () => {
+    //When a
     srvHelpers.helpNewLogout(wss, ws, user);
   });
 });

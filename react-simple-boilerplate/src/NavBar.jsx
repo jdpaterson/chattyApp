@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Functional component for the nav bar
 export default function NavBar(props){
     return (
       <nav className="navbar">

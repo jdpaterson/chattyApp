@@ -6,6 +6,7 @@ let messages;
 let newState = {};
 let newMsg = {};
 
+//Generates a new user object with a uId, avatar, and random color
 async function initConnect(wss, ws, connects){
   const colorRes = await axios.get('http://www.colr.org/json/color/random');
   const uuId = uuidv4();
@@ -18,15 +19,19 @@ async function initConnect(wss, ws, connects){
   return connects[uuId];
 }
 
+//Handles a new user login
 async function helpNewLogin(wss, ws, connects){
+  //Get the new user object
   const user = await initConnect(wss, ws, connects);
 
+  //Send the new user object to the new user
   ws.send(JSON.stringify({
     user: user,
     action: 'myLogin',
     numUsers: wss.clients.size
   }));
 
+  //Notify other users of the new login
   const publicMsg = {
     id: uuidv4(),
     action: 'newLogin',
@@ -39,11 +44,15 @@ async function helpNewLogin(wss, ws, connects){
       client.send(JSON.stringify(publicMsg));
     }
   })
+
   return user;
 
 }
 
+//Handles a user logout
 function helpNewLogout(wss, ws, user){
+
+  //Notify all users that a user has logged out
   newMsg = {
     id: uuidv4(),
     action: 'logout',
@@ -51,24 +60,28 @@ function helpNewLogout(wss, ws, user){
     numUsers: wss.clients.size,
     type: 'notification'
   }
-
   wss.clients.forEach(client => {
     if (client !== ws && client.readyState === WebSocket.OPEN) {
       client.send(JSON.stringify(newMsg));
     }
   })
+
 }
 
+//Handles a user name change
 function helpNameChange(wss, ws, msg, user){
+
   const oldName = user.name;
   user.name = msg.newName;
   user.avatar = `https://api.adorable.io/avatars/285/${msg.newName}@adorable.io.png`;
 
+  //Send the user their updated user object w new avatar and name
   ws.send(JSON.stringify({
     user: user,
     action: 'myNameChange',
   }));
 
+  //Notify all users of the name change
   wss.clients.forEach(client => {
     client.send(JSON.stringify({
       id: uuidv4(),
@@ -79,8 +92,10 @@ function helpNameChange(wss, ws, msg, user){
     })
 }
 
+//Handles messages to the server
 function helpNewMessage(wss, ws, msg, user){
 
+  //Notify all users of the new message
   let newMsg = {
     id: uuidv4(),
     action: msg.action,
